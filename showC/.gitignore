@@ -2,3 +2,5 @@
 ipch/*
 Release/*
 Debug/*
+showC/Release/*
+showC/Debug/*
