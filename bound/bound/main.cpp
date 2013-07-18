@@ -146,7 +146,7 @@ int edeto(int& totalnum,vector<vector<int>>& ede_map,vector<vector<CvPoint>>& tr
 
 int main(int argc,char* argv[])
 {
-	_chdir("E:\\project\\pmsvoc");
+	//_chdir("E:\\project\\pmsvoc");
 	char tD[40];
 	if (argc>1)
 	{
@@ -163,7 +163,7 @@ int main(int argc,char* argv[])
 
 	double** values;
 
-	double thresh_edge(5.0);
+	double thresh_edge(3.5);
 
 	FILE* fp;
 	fp=fopen(tDf,"r");
@@ -195,12 +195,7 @@ int main(int argc,char* argv[])
 	fclose(fp);
 	
 
-	for (int i=0;i<heit;i++)
-	{
-		delete[] values[i];
-	}
-	delete[] values;
-
+	
 	vector<vector<CvPoint>> traces;
 	edeto(totalnum,edemap,traces);
 
@@ -219,11 +214,18 @@ int main(int argc,char* argv[])
 		for(int i=0;i<traces.size();i++){
 			for	(int j=0;j<traces[i].size();j++)
 			{
-				fprintf(ouF,"%d %d\t",traces[i][j].x,traces[i][j].y);
+				fprintf(ouF,"%d %d %lf\t",traces[i][j].x,traces[i][j].y,values[traces[i][j].y][traces[i][j].x]);
 			}
 			fprintf(ouF,"\n");
 		}
 	}
 	fclose(ouF);
+
+	for (int i=0;i<heit;i++)
+	{
+		delete[] values[i];
+	}
+	delete[] values;
+
 	return 0; 
 }

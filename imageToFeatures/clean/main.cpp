@@ -13,7 +13,7 @@
 #include "FileInOut.h"
 using namespace std;
 using namespace cv;
-#define debugMode
+//#define debugMode
 
 #define featureDimension 128
 
@@ -57,7 +57,7 @@ void main(int argc, char* argv[])
 	if (argc<2)
 	{
 		printf("not enough parameters");
-		return -1;
+	//	return -1;
 	}
 	
 	s=argv[1];
@@ -87,10 +87,10 @@ void main(int argc, char* argv[])
 
 	
 
-		//SiftFeatureDetector detector(-200.0,1000000.0,4,3,-1,0);
-		//detector.detect(iptimg,temkpts);
+		SiftFeatureDetector detector(-200.0,1000000.0,4,3,-1,0);
+		detector.detect(iptimg,temkpts);
 
-		temkpts.clear();
+	/*	temkpts.clear();
 		
 		string kpfn=s+"_kpts.txt";
 		FILE* fp;
@@ -112,7 +112,7 @@ void main(int argc, char* argv[])
 
 		fclose(fp);
 
-		
+		*/
 
 		
 

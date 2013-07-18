@@ -27,6 +27,7 @@ char wndname[] = "Edge";
 char tbarname[] = "Threshold";
 int edge_thresh = 0;
 
+vector<vector<int> > rects;
 
 
 IplImage *image = 0, *edge = 0, *sh=0;
@@ -64,11 +65,23 @@ void drawp(CvPoint p,int inde_,IplImage *frame1)
 	CvScalar sc=CV_RGB(label_color[cT][0],label_color[cT][1],label_color[cT][2]);
 	cvCircle(frame1,p,1,sc,1,8,0);
 }
+struct mypoint
+{
+	CvPoint pt;
+	double score;
+	mypoint()
+	{
+		pt.x=0;
+		pt.y=0;
+		score=0.0;
+	};
+};
+
 int main(int argc,char* argv[])
 {
 
 	//D:\ethzshAllAngle\0
-	_chdir("E:\\project\\pmsvoc");
+	//_chdir("E:\\CarData\\voc2007\\testing\\car");
 	char tD[40];
 	if (argc>1)
 	{
@@ -77,16 +90,19 @@ int main(int argc,char* argv[])
 	}
 	else
 	{
-		sprintf_s(tD,"000245");
+		sprintf_s(tD,"009963");
 	}
 	char tDf[40];
 	char tDi[40];
+	char tDa[40];
+
+	sprintf_s(tDa,"%s_objs.txt",tD);
 	sprintf_s(tDf,"%s_boundary.txt",tD);
 	sprintf_s(tDi,"%s.jpg",tD);
 	vector<int> vecSiz;
 	vecSiz.clear();
-	vector<vector<CvPoint>> traces;
-	vector<CvPoint> tr_;
+	vector<vector<mypoint> > traces;
+	vector<mypoint> tr_;
 	tr_.clear();
 
 	FILE* ouF;
@@ -98,13 +114,13 @@ int main(int argc,char* argv[])
 	for(int i=0;i<temI;i++)
 	{
 		fscanf(ouF,"%d\t",&vecSiz[i]);
-		traces[i].resize(vecSiz[i],cvPoint(0,0));
+		traces[i].resize(vecSiz[i],mypoint());
 	}
 	fscanf(ouF,"\n");
 	for(int i=0;i<vecSiz.size();i++){
 		for	(int j=0;j<vecSiz[i];j++)
 		{
-			fscanf(ouF,"%d %d\t",&traces[i][j].x,&traces[i][j].y);
+			fscanf(ouF,"%d %d %lf\t",&traces[i][j].pt.x,&traces[i][j].pt.y,&traces[i][j].score);
 		}
 		fscanf(ouF,"\n");
 	}
@@ -129,11 +145,11 @@ int main(int argc,char* argv[])
 	{
 		for (int i=0;i<traces.size();i++)
 		{
-		//	if (traces[i].size()>20)
+			if (traces[i].size()>20)
 			{
 				for (int j=0;j<traces[i].size();j++)
 				{
-					drawp(traces[i][j],index_c,edge);
+					drawp(traces[i][j].pt,index_c,edge);
 				}
 				index_c+=1;
 			}
