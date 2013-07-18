@@ -10,6 +10,8 @@ end;
 [B,count] = fread(fid,prod(d),'float');
 B = reshape(B,fliplr(d));
 
+fclose(fid);
+
 fid=fopen(sprintf('%s_edge.txt',fl),'wb');
 n=size(B,1);
 fprintf(fid,'%d %d\n',n,size(B,2));
