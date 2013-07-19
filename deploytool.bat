@@ -1,8 +1,9 @@
 del *.exe  /q
 
-copy E:\project\pmsvoc\showC\Release\showC.exe 
-copy E:\project\pmsvoc\bound\Release\toTrace.exe
-copy E:\project\pmsvoc\edgeshow\Release\edgeshow.exe
+copy D:\project\pmsvoc\showC\Release\showC.exe 
+copy D:\project\pmsvoc\bound\Release\toTrace.exe
+copy D:\project\pmsvoc\edgeshow\Release\edgeshow.exe
+copy D:\project\pmsvoc\samplekpts\Release\kptSample.exe
 
 del E:\CarData\voc2007\testing\car\*.m /s /f  /q
 del E:\CarData\voc2007\testing\car\*.py /s /f  /q
