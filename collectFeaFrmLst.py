@@ -15,7 +15,7 @@ if __name__ == "__main__":
     features=[]
     positions=[]
     for fl in fls:             
-        temfile=open(fl+'_sift.txt','r')
+        temfile=open(fl+'_surf.txt','r')
         num=int(temfile.readline().strip())
         for i in range(0, num):
             positions.append(temfile.readline().strip())

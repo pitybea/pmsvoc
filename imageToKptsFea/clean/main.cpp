@@ -15,7 +15,7 @@ using namespace std;
 using namespace cv;
 //#define debugMode
 
-#define featureDimension 128
+#define featureDimension 64
 
 vector<int> infromstring(string s)
 {
@@ -33,35 +33,55 @@ vector<int> infromstring(string s)
 	return rslt;
 }
 
-class featype
+
+
+template<class T>
+vector<vector<T> > TransitMtx(vector<vector<T> > oData,vector<vector<T> >trasM)
 {
-	public:
-	featype()
+	vector<vector<T> > tData;
+	tData.resize(oData.size(),vector<T>(trasM[0].size(),0.0));
+	
+	for (int i=0;i<oData.size();i++)
 	{
 
-	};
-	Point pos;
-	double feature[featureDimension];
-
-	static void initOne(FILE* fp,featype &t)
-	{
-		fscanf(fp,"%d %d\n",&t.pos.x,&t.pos.y);
-		for (int i=0;i<featureDimension;i++)
+		for (int j=0;j<trasM[0].size();j++)
 		{
-			fscanf(fp,"%lf ",&t.feature[i]);
+			for (int k=0;k<trasM.size();k++)
+			{
+				tData[i][j]+=oData[i][k]*trasM[k][j];
+			}
 		}
-	};
-	static void printOne(FILE* fp, featype t)
+	}
+	return tData;
+}
+
+
+template<class T>
+int ZeroMnVec(vector<vector<T> >& dataset)
+{
+	if (dataset.size()>0)
 	{
-		fprintf(fp,"%d %d\n",t.pos.x,t.pos.y);
-		for (int i=0;i<featureDimension;i++)
+		if (dataset[0].size()>0)
 		{
-			fprintf(fp,"%lf ",t.feature[i]);
+			for (int i=0;i<dataset.size();i++)
+			{
+				double temtol(0.0);
+				for (int j=0;j<dataset[i].size();j++)
+				{
+					temtol+=dataset[i][j];
+				}
+				temtol/=dataset[0].size();
+				for (int j=0;j<dataset[i].size();j++)
+				{
+					dataset[i][j]-=temtol;
+				}
+			}
 		}
-	};
+	}
+	return 0;
+}
 
-};
-
+vector<vector<double> > pcamatrix;
 
 void kptstoNumKpFea(Mat iptimg, int thr, int stp,string s)
 {
@@ -88,38 +108,35 @@ void kptstoNumKpFea(Mat iptimg, int thr, int stp,string s)
 	fclose(ft);
 
 	
-	SiftDescriptorExtractor extractor;
+	SurfDescriptorExtractor extractor;
 
 	Mat descriptor;
 
-
-	extractor.compute(iptimg,temkpts,descriptor);
-
-	vector<featype> feas;
+	vector<vector<double> > feas;
 	feas.clear();
+
+	
+	extractor.compute(iptimg, temkpts ,descriptor);
+	feas.resize(descriptor.rows,vector<double>(featureDimension,0.0));
 	for (auto i=0;i<descriptor.rows;i++)
 	{
-		featype temfes;
-
-		temfes.pos.x=(int)temkpts[i].pt.x;
-		temfes.pos.y=(int)temkpts[i].pt.y;
-		Scalar ss(255,0,0);
+		
 		
 		//temfes.feature.resize(128,0.0);
 		double temsum(0.000001);
 		for (auto j=0;j<descriptor.cols;j++)
 		{
-			temfes.feature[j]=descriptor.at<float>(i,j);
-			temsum+=temfes.feature[j];
+			feas[i][j]=descriptor.at<float>(i,j);
+			temsum+=feas[i][j];
 		}
 		for (auto j=0;j<descriptor.cols;j++)
 		{
-			temfes.feature[j]/=temsum;
+			feas[i][j]/=temsum;
 	
 		}
 	
 	
-		feas.push_back(temfes);
+	//	feas.push_back(temfes);
 	}
 	char tD[40];
 	sprintf(tD,"%s_bt%d_stp%d",s.c_str(),thr,stp);
@@ -131,7 +148,7 @@ void kptstoNumKpFea(Mat iptimg, int thr, int stp,string s)
 	fp=fopen((mys+"_fpts.txt").c_str(),"w");
 	for (int i = 0; i < temkpts.size(); i++)
 	{
-		fprintf(fp,"%d %d\n",temkpts[i].pt.x,temkpts[i].pt.y);
+		fprintf(fp,"%d %d\n",(int)temkpts[i].pt.x,(int)temkpts[i].pt.y);
 	}
 	fclose(fp);
 	fp=fopen((mys+"_feas.txt").c_str(),"w");
@@ -139,11 +156,26 @@ void kptstoNumKpFea(Mat iptimg, int thr, int stp,string s)
 	{
 		for (int j = 0; j < featureDimension; j++)
 		{
-			fprintf(fp,"%lf ",feas[i].feature[j]);
+			fprintf(fp,"%lf ",feas[i][j]);
 		}
 		fprintf(fp,"\n");
 	}
 	fclose(fp);
+	/*
+	ZeroMnVec(feas);
+
+	vector<vector<double> > opp=TransitMtx(feas,pcamatrix);
+
+	fp=fopen((mys+"_dimrd.txt").c_str(),"w");
+	for (int i = 0; i < opp.size(); i++)
+	{
+		for (int j = 0; j < opp[i].size(); j++)
+		{
+			fprintf(fp,"%lf ",feas[i][j]);
+		}
+		fprintf(fp,"\n");
+	}
+	fclose(fp);*/
 	
 	
 
@@ -153,17 +185,30 @@ void main(int argc, char* argv[])
 {
 	string s;
 	
-//	s=argv[1];
+	s=argv[1];
 	
-	_chdir("E:\\CarData\\voc2007\\training\\car");
+	//_chdir("E:\\CarData\\voc2007\\training\\car");
 	
-	s="001119";
+	//s="001119";
 	Mat iptimg=imread(s+".jpg");
 
 
 	vector<int> thrs=infromstring("..\\..\\bndThreshld.txt");
 
 	vector<int> kspt=infromstring("..\\..\\kptStep.txt");
+	/*
+	pcamatrix.clear();
+	pcamatrix.resize(64,vector<double>(63,0.0));
+	FILE* fp=fopen("pcaMatrix.txt","r");
+	for (int i = 0; i < 64; i++)
+	{
+		for (int j = 0; j < 63; j++)
+		{
+			fscanf(fp,"%lf ",&pcamatrix[i][j]);
+		}
+		fscanf(fp,"\n");
+	}
+	fclose(fp);*/
 
 	for (int i = 0; i < thrs.size(); i++)
 	{

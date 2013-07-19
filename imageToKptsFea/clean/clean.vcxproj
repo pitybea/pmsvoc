@@ -22,7 +22,7 @@
     <ProjectGuid>{A5BB511C-A683-43B8-A23D-79615131E4D6}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>clean</RootNamespace>
-    <ProjectName>imageToFeatures</ProjectName>
+    <ProjectName>tokptfeas</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

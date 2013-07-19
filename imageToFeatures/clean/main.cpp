@@ -15,7 +15,7 @@ using namespace std;
 using namespace cv;
 //#define debugMode
 
-#define featureDimension 128
+#define featureDimension 64
 
 
 
@@ -77,7 +77,7 @@ void main(int argc, char* argv[])
 
 		
 
-		SiftDescriptorExtractor extractor;
+		SurfDescriptorExtractor extractor;
 
 		Mat descriptor;
 
@@ -87,7 +87,7 @@ void main(int argc, char* argv[])
 
 	
 
-		SiftFeatureDetector detector(-200.0,1000000.0,4,3,-1,0);
+		SurfFeatureDetector detector;
 		detector.detect(iptimg,temkpts);
 
 	/*	temkpts.clear();
@@ -146,7 +146,7 @@ void main(int argc, char* argv[])
 	
 			feas.push_back(temfes);
 		}
-		fileIOclass::OutVector(s+"_sift.txt",feas);
+		fileIOclass::OutVector(s+"_surf.txt",feas);
 	
 		
 	
