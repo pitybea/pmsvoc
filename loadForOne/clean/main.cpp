@@ -43,11 +43,11 @@ pair<vector<vector<int> >, vector<T>> rangequery(int xmin,int ymin,int ymax,int 
 
 	auto st=daset.lower_bound (ymin);
 
-	while(st->first<ymax && st!=daset.end() )
+	while( st!=daset.end() && st->first<ymax )
 	{
 		auto st1=st->second.lower_bound(xmin);
 
-		while (st1->first<xmax && st1!=st->second.end() )
+		while ( st1!=st->second.end() && st1->first<xmax  )
 		{
 			vector<int> tvi(2,0);
 			tvi[0]=st1->first;
@@ -64,15 +64,25 @@ pair<vector<vector<int> >, vector<T>> rangequery(int xmin,int ymin,int ymax,int 
 	return pair<vector<vector<int> >, vector<T>> (r1, rslt);
 }
 
-
-void kptstoNumKpFea( int thr, int stp,string s)
+template<class T1,class T2, class T3>
+struct triple
 {
+	T1 feas;
+	T2 kptFea;
+	T3 intmap;
+};
+
+triple<vector<vector<double> >,map<int,map<int, int > >, vector<vector<int> > > kptstoNumKpFea( int thr, int stp,string s)
+{
+
+	triple<vector<vector<double> >,map<int,map<int, int > >, vector<vector<int> > > rslt;
+
 	vector<pair<int,int> > temkpts;
 
 	temkpts.clear();
 
-	vector<vector<double> > feas;
-	feas.clear();
+	//vector<vector<double> > feas;
+	rslt.feas.clear();
 
 
 	
@@ -97,57 +107,59 @@ void kptstoNumKpFea( int thr, int stp,string s)
 	}
 	fclose(fp);
 
-	feas.resize(tnum,vector<double>(featureDimension,0.0));
+	rslt.feas.resize(tnum,vector<double>(featureDimension,0.0));
 
 	fp=fopen((mys+"_feas.txt").c_str(),"r");
-	for (int i = 0; i < feas.size(); i++)
+	for (int i = 0; i < rslt.feas.size(); i++)
 	{
 		for (int j = 0; j < featureDimension; j++)
 		{
-			fscanf(fp,"%lf ",&feas[i][j]);
+			fscanf(fp,"%lf ",&rslt.feas[i][j]);
 		}
 		fscanf(fp,"\n");
 	}
 	fclose(fp);
 
 
-	map<int,map<int, int > > kptFea;
+	//map<int,map<int, int > > kptFea;
 
-	kptFea.clear();
+	rslt.kptFea.clear();
 
 	for (int i = 0; i < temkpts.size(); i++)
 	{
 		int a=temkpts[i].second;
-		if (kptFea.count(a)>0)
+		if (rslt.kptFea.count(a)>0)
 		{
 			int b=temkpts[i].first;
-			kptFea[b].insert(pair<int,int>(b,i));
+			rslt.kptFea[a].insert(pair<int,int>(b,i));
 		}
 		else
 		{
 			map<int, int > sth;
 			int b=temkpts[i].first;
 			sth.insert(pair<int,int>(b,i));
-			kptFea.insert(pair<int,map<int, int > >(a,sth));
+			rslt.kptFea.insert(pair<int,map<int, int > >(a,sth));
 		}
 	}
 
-	auto sth=rangequery(10,0,200,300,kptFea);
+	
 
-	vector<vector<int> > intmap;
+	auto sth=rangequery(10,0,200,300,rslt.kptFea);
+
+	//vector<vector<int> > intmap;
 
 	FILE* ouF;
 	ouF=fopen((mys+"_kptintg.txt").c_str(),"r");
 	
 	int heit,wid;
 	fscanf(ouF,"%d %d\n",&heit,&wid);
-	intmap.resize(heit,vector<int>(wid,0));
+	rslt.intmap.resize(heit,vector<int>(wid,0));
 
 	for (int i = 0; i < heit; i++)
 	{
 		for (int j = 0; j < wid; j++)
 		{
-			fscanf(fp,"%d ",&intmap[i][j]);
+			fscanf(fp,"%d ",&rslt.intmap[i][j]);
 		}
 		fscanf(fp,"\n");
 	}
@@ -155,7 +167,7 @@ void kptstoNumKpFea( int thr, int stp,string s)
 	
 	fclose(ouF);
 	
-
+	return rslt;
 }
 
 void main(int argc, char* argv[])
@@ -164,20 +176,31 @@ void main(int argc, char* argv[])
 	
 	//s=argv[1];
 	
-	_chdir("E:\\CarData\\voc2007\\testing\\car");
+	_chdir("E:\\car");
 	
-	s="000014";
+	s="000007";
+	triple<vector<vector<double> >,map<int,map<int, int > >, vector<vector<int> > > ms;
+	vector<vector< triple<vector<vector<double> >,map<int,map<int, int > >, vector<vector<int> > > > > infos;
+	infos.resize(20,vector< triple<vector<vector<double> >,map<int,map<int, int > >, vector<vector<int> > > > (20,ms));
 
-
+	for (int i = 0; i < 20; i++)
+	{
+		for (int j = 0; j < 20; j++)
+		{
+			infos[i][j]=kptstoNumKpFea(50,13,s);
+		}
+	}
+	auto sth=kptstoNumKpFea(50,13,s);
 
 	vector<int> thrs=infromstring("..\\..\\bndThreshld.txt");
 
 	vector<int> kspt=infromstring("..\\..\\kptStep.txt");
 
 
-	for (int i = 0; i < thrs.size(); i++)
+	
+	for (int j = 0; j < kspt.size(); j++)
 	{
-		for (int j = 0; j < kspt.size(); j++)
+		for (int i = 0; i < thrs.size(); i++)
 		{
 			kptstoNumKpFea(thrs[i],kspt[j],s);
 		}
