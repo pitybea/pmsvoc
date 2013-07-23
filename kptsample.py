@@ -18,10 +18,12 @@ if __name__ == "__main__":
     thr=infile('..\\..\\bndThreshld.txt')
     stp=infile('..\\..\\kptStep.txt')
     
-    bat=open('%skptrun.bat'%(fln),'wb')
+    bat=open('%stemrun.bat'%(fln),'wb')
     for th in thr:
         for st in stp:
-            bat.write('start /B kptSample %s %s %s \n'%(fln,th,st))
+            bat.write('start /B kptIntegr %s %s %s \n'%(fln,th,st))
     bat.close()
-    print 'start /B %skptrun.bat'%(fln)
+    cmd='start /B %stemrun.bat'%(fln)
+    print cmd 
+    #os.system(cmd)
     

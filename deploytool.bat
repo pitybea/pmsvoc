@@ -4,6 +4,8 @@ copy D:\project\pmsvoc\showC\Release\showC.exe
 copy D:\project\pmsvoc\bound\Release\toTrace.exe
 copy D:\project\pmsvoc\edgeshow\Release\edgeshow.exe
 copy D:\project\pmsvoc\samplekpts\Release\kptSample.exe
+copy D:\project\pmsvoc\kptintg\Release\kptIntegr.exe
+
 
 del E:\CarData\voc2007\testing\car\*.m /s /f  /q
 del E:\CarData\voc2007\testing\car\*.py /s /f  /q
