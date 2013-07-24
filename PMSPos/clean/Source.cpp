@@ -32,7 +32,7 @@ pair<vector<vector<double> >,vector<vector<vector<double> > > > getAllfeas(int d
 		tvd.clear();
 		tvd=fileIOclass::InVectorSDouble(s+"_ptscpp.txt");
 
-		auto tvm=selectVecButLstTwo(tvd,dim);
+		auto tvm=selectVec(tvd,dim);
 
 		rslt.insert(rslt.end(),tvm.begin(),tvm.end());
 		arst.push_back(tvm);
@@ -99,33 +99,12 @@ void givescoreshelp(PMStruc pedmd,int dim,string s,bool ada,bool another,adaboos
 		double siz=(double)tvd.size();
 		vector<double> result;
 		double score;
-		if(!another)
-			score=pedmd.givePyramidMatchScore(selectVecButLstTwo ( tvd,dim),false,result);
-		else
-			score=pedmd.givePyramidMatchScore(selectVec ( tvd,dim),false,result);
-		if(ada)
-		{
-			vector<double> to;
-			to.resize(result.size(),0.0);
-			for (int i = 0; i < result.size(); i++)
-			{
-				to[i]=(double)result[i]/siz;
-				printf("%lf ",to[i]);
-			}
-			printf("%lf\n",machine.classfy(to));
-		}
-		else
-		{
-			
-			/*vector<double> to;
-			to.resize(result.size(),0.0);
-			for (int i = 0; i < result.size(); i++)
-			{
-				to[i]=(double)result[i]/siz;
-				printf("%lf ",to[i]);
-			}*/
-			printf("%lf\n",score);
-		}
+	
+		score=pedmd.givePyramidMatchScore(selectVec( tvd,dim),another,result);
+		
+	
+		printf("%lf\n",score);
+
 	}
 }
 
@@ -139,8 +118,8 @@ void givescores(PMStruc pedmd,int dim,bool ada,bool another)
 //	FILE* fp=fopen("adabMach.txt","r");
 //	machine.loadFromfile(fp);
 //	fclose(fp);
-	givescoreshelp(pedmd,dim,"positive.lst",ada,another,machine);
-	givescoreshelp(pedmd,dim,"negative.lst",ada,another,machine);
+	givescoreshelp(pedmd,dim,"positive.lst",ada,true,machine);
+	givescoreshelp(pedmd,dim,"negative.lst",ada,false,machine);
 	
 
 	
@@ -576,19 +555,19 @@ int testposspe()
 
 int benchmark()
 {
-	_chdir("E:\\carData\\TrainImages");
+	_chdir("E:\\CarData\\voc2007\\transfer");
 	
-	int dim=10;
+	int dim=12;
 	auto ad=getAllfeas(dim);
 	auto data=ad.first;
 	
-	_chdir("E:\\carData\\TestImages\\mytest");
+	_chdir("E:\\CarData\\voc2007\\transfer");
 
 
 
 	PMStruc pedmd(PMStruc::positionsimple,5);
 //	printf("-------------******************-----(%d)--------**********************\n",dim);
-	pedmd.generatePymFromdata(data,dim);
+	pedmd.generatePymFromdata(data,dim-2);
 	givescores(pedmd,dim,false,false);
 
 	return 0;
@@ -776,7 +755,7 @@ int main()
 //	benchmark();
 
 
-//	benchmark();
-	splitmethod();
+	benchmark();
+//	splitmethod();
 	return 0;
 }

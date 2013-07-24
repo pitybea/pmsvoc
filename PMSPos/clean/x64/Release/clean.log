@@ -1,25 +1,88 @@
-﻿Build started 2013-07-22 14:51:06.
-     1>Project "D:\project\PyramidMatchScore\PMSPos\clean\clean.vcxproj" on node 2 (Build target(s)).
+﻿Build started 2013-07-24 21:13:23.
+     1>Project "D:\project\pmsvoc\PMSPos\clean\clean.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /ID:\Downloads\opencv\build\include /ID:\Downloads\opencv\build\include\opencv /Zi /nologo /W3 /WX- /O2 /Oi /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc110.pdb" /Gd /TP /errorReport:prompt Source.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /ID:\Downloads\opencv\build\include /ID:\Downloads\opencv\build\include\opencv /Zi /nologo /W3 /WX- /O2 /Oi /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc110.pdb" /Gd /TP /errorReport:prompt adaboost.cpp PMS.cpp Source.cpp
+         adaboost.cpp
+     1>adaboost.cpp(65): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+     1>adaboost.cpp(184): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+         PMS.cpp
+     1>d:\project\pmsvoc\pmspos\clean\VecDeal.h(253): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(237) : see declaration of 'fscanf'
+     1>d:\project\pmsvoc\pmspos\clean\VecDeal.h(256): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(237) : see declaration of 'fscanf'
+     1>PMS.cpp(112): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(122): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>PMS.cpp(129): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>PMS.cpp(136): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>PMS.cpp(143): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>PMS.cpp(178): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(187): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>PMS.cpp(209): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(218): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>PMS.cpp(232): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>PMS.cpp(246): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>PMS.cpp(305): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>PMS.cpp(317): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(319): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(384): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(237) : see declaration of 'fscanf'
+     1>PMS.cpp(388): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(237) : see declaration of 'fscanf'
+     1>PMS.cpp(393): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(237) : see declaration of 'fscanf'
+     1>PMS.cpp(398): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(237) : see declaration of 'fscanf'
+     1>PMS.cpp(424): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(237) : see declaration of 'fscanf'
+     1>PMS.cpp(428): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(237) : see declaration of 'fscanf'
+     1>PMS.cpp(447): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(237) : see declaration of 'fscanf'
+     1>PMS.cpp(451): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(237) : see declaration of 'fscanf'
+     1>PMS.cpp(460): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(237) : see declaration of 'fscanf'
+     1>PMS.cpp(566): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(570): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>PMS.cpp(574): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(586): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(599): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(602): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>PMS.cpp(606): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(637): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(645): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>PMS.cpp(649): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>PMS.cpp(689): warning C4267: '+=' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(840): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(897): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(1055): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(1092): warning C4267: '=' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(1131): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>PMS.cpp(1135): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>PMS.cpp(1159): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(1324): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(1359): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(1408): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(1409): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>PMS.cpp(1433): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
          Source.cpp
-     1>d:\project\pyramidmatchscore\pmspos\clean\VecDeal.h(253): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\project\pmsvoc\pmspos\clean\VecDeal.h(253): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(237) : see declaration of 'fscanf'
-     1>d:\project\pyramidmatchscore\pmspos\clean\VecDeal.h(256): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\project\pmsvoc\pmspos\clean\VecDeal.h(256): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(237) : see declaration of 'fscanf'
-     1>d:\project\pyramidmatchscore\pmspos\clean\../../../fileIoinclude/FileInOut.h(6): warning C4005: '_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES' : macro redefinition
+     1>d:\project\pmsvoc\pmspos\clean\../../../fileIoinclude/FileInOut.h(6): warning C4005: '_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES' : macro redefinition
                  C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\crtdefs.h(355) : see previous definition of '_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES'
-     1>Source.cpp(272): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+     1>Source.cpp(251): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\project\PyramidMatchScore\PMSPos\x64\Release\pyramidMS.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:D:\Downloads\opencv\build\x64\vc10\lib opencv_core231d.lib opencv_imgproc231d.lib opencv_highgui231d.lib opencv_ml231d.lib opencv_video231d.lib opencv_features2d231d.lib opencv_calib3d231d.lib opencv_objdetect231d.lib opencv_contrib231d.lib opencv_legacy231d.lib opencv_flann231d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\project\PyramidMatchScore\PMSPos\x64\Release\pyramidMS.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\project\PyramidMatchScore\PMSPos\x64\Release\pyramidMS.lib" /MACHINE:X64 x64\Release\FileIO.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\project\pmsvoc\PMSPos\x64\Release\pyramidMS.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:D:\Downloads\opencv\build\x64\vc10\lib opencv_core231d.lib opencv_imgproc231d.lib opencv_highgui231d.lib opencv_ml231d.lib opencv_video231d.lib opencv_features2d231d.lib opencv_calib3d231d.lib opencv_objdetect231d.lib opencv_contrib231d.lib opencv_legacy231d.lib opencv_flann231d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\project\pmsvoc\PMSPos\x64\Release\pyramidMS.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\project\pmsvoc\PMSPos\x64\Release\pyramidMS.lib" /MACHINE:X64 x64\Release\FileIO.obj
          x64\Release\adaboost.obj
          x64\Release\PMS.obj
          x64\Release\Source.obj
          Generating code
          Finished generating code
-         clean.vcxproj -> D:\project\PyramidMatchScore\PMSPos\x64\Release\pyramidMS.exe
-     1>Done Building Project "D:\project\PyramidMatchScore\PMSPos\clean\clean.vcxproj" (Build target(s)).
+         clean.vcxproj -> D:\project\pmsvoc\PMSPos\x64\Release\pyramidMS.exe
+     1>Done Building Project "D:\project\pmsvoc\PMSPos\clean\clean.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:07.47
+Time Elapsed 00:00:14.42
