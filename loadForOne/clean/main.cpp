@@ -176,25 +176,22 @@ void main(int argc, char* argv[])
 	
 	//s=argv[1];
 	
-	_chdir("E:\\car");
+	//_chdir("E:\\car");
 	
 	s="000007";
+
+	
+	vector<int> thrs=infromstring("bndThreshld.txt");
+
+	vector<int> kspt=infromstring("kptStep.txt");
+
 	triple<vector<vector<double> >,map<int,map<int, int > >, vector<vector<int> > > ms;
 	vector<vector< triple<vector<vector<double> >,map<int,map<int, int > >, vector<vector<int> > > > > infos;
-	infos.resize(20,vector< triple<vector<vector<double> >,map<int,map<int, int > >, vector<vector<int> > > > (20,ms));
+	infos.resize(kspt.size(),vector< triple<vector<vector<double> >,map<int,map<int, int > >, vector<vector<int> > > > (thrs.size(),ms));
 
-	for (int i = 0; i < 20; i++)
-	{
-		for (int j = 0; j < 20; j++)
-		{
-			infos[i][j]=kptstoNumKpFea(50,13,s);
-		}
-	}
-	auto sth=kptstoNumKpFea(50,13,s);
 
-	vector<int> thrs=infromstring("..\\..\\bndThreshld.txt");
+	
 
-	vector<int> kspt=infromstring("..\\..\\kptStep.txt");
 
 
 	
@@ -202,7 +199,7 @@ void main(int argc, char* argv[])
 	{
 		for (int i = 0; i < thrs.size(); i++)
 		{
-			kptstoNumKpFea(thrs[i],kspt[j],s);
+			infos[j][i]=	kptstoNumKpFea(thrs[i],kspt[j],s);
 		}
 	}
 

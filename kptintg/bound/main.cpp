@@ -9,19 +9,19 @@
 using namespace std;
 #include <fstream>
 #include <stdio.h>
-#include <cv.h>
-#include <highgui.h>
+
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <vector>
 #include <string>
 
-#pragma comment(lib,"cxcore.lib")
-#pragma comment(lib,"cv.lib") 
-#pragma comment(lib,"ml.lib") 
-#pragma comment(lib,"highgui.lib")  
 
+struct CvPoint
+{
+	int x;
+	int y;
+};
 
 int main(int argc,char* argv[])
 {
