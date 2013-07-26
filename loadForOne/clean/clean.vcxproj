@@ -146,12 +146,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\kdtree\kdtree-0.5.6\kdtree.c" />
-    <ClCompile Include="FileIO.cpp" />
+    <ClCompile Include="..\..\..\fileIoinclude\FileIO.cpp" />
     <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="FileInOut.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
