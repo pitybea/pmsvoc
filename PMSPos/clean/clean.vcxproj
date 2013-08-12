@@ -147,14 +147,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\fileIoinclude\FileIO.cpp" />
+    <ClCompile Include="..\..\common\PMS.cpp" />
     <ClCompile Include="adaboost.cpp" />
-    <ClCompile Include="PMS.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="adaboost.h" />
-    <ClInclude Include="PMS.h" />
-    <ClInclude Include="VecDeal.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -7,9 +7,10 @@
 #include <stdio.h>
 #include <Windows.h>
 #include <direct.h>
-#include "PMS.h"
+
 #include "adaboost.h"
 #include "../../../fileIoinclude/FileInOut.h"
+#include "../../common/PMS.h"
 
 
 
@@ -32,7 +33,7 @@ pair<vector<vector<double> >,vector<vector<vector<double> > > > getAllfeas(int d
 		tvd.clear();
 		tvd=fileIOclass::InVectorSDouble(s+"_ptscpp.txt");
 
-		auto tvm=selectVecButLstTwo(tvd,dim);
+		auto tvm=selectVec(tvd,dim);
 
 		rslt.insert(rslt.end(),tvm.begin(),tvm.end());
 		arst.push_back(tvm);
@@ -99,33 +100,12 @@ void givescoreshelp(PMStruc pedmd,int dim,string s,bool ada,bool another,adaboos
 		double siz=(double)tvd.size();
 		vector<double> result;
 		double score;
-		if(!another)
-			score=pedmd.givePyramidMatchScore(selectVecButLstTwo ( tvd,dim),false,result);
-		else
-			score=pedmd.givePyramidMatchScore(selectVec ( tvd,dim),false,result);
-		if(ada)
-		{
-			vector<double> to;
-			to.resize(result.size(),0.0);
-			for (int i = 0; i < result.size(); i++)
-			{
-				to[i]=(double)result[i]/siz;
-				printf("%lf ",to[i]);
-			}
-			printf("%lf\n",machine.classfy(to));
-		}
-		else
-		{
-			
-			/*vector<double> to;
-			to.resize(result.size(),0.0);
-			for (int i = 0; i < result.size(); i++)
-			{
-				to[i]=(double)result[i]/siz;
-				printf("%lf ",to[i]);
-			}*/
-			printf("%lf\n",score);
-		}
+	
+		score=pedmd.givePyramidMatchScore(selectVec( tvd,dim),another,result);
+		
+	
+		printf("%lf\n",score);
+
 	}
 }
 
@@ -139,8 +119,8 @@ void givescores(PMStruc pedmd,int dim,bool ada,bool another)
 //	FILE* fp=fopen("adabMach.txt","r");
 //	machine.loadFromfile(fp);
 //	fclose(fp);
-	givescoreshelp(pedmd,dim,"positive.lst",ada,another,machine);
-	givescoreshelp(pedmd,dim,"negative.lst",ada,another,machine);
+	givescoreshelp(pedmd,dim,"positive.lst",ada,true,machine);
+	givescoreshelp(pedmd,dim,"negative.lst",ada,false,machine);
 	
 
 	
@@ -198,7 +178,7 @@ void givescores(PMSEnsemble pedmd,int dim)
 void testDimension(pair<vector<vector<double> >,vector<vector<vector<double> > > > ad,int dim)
 {
 		auto data=ad.first;
-		PMStruc pedmd(PMStruc::postitionSpecific);
+		PMStruc pedmd;
 		printf("-------------******************-----(%d)--------**********************\n",dim);
 		pedmd.generatePymFromdata(selectVecButLstTwo(data,dim),dim);
 		givescores(pedmd,dim,false,false);
@@ -268,7 +248,7 @@ int test_example_num()
 	PMSEnsemble pem;
 	pem.generateAaBsFromdata(data,6);
 
-	PMStruc n(PMStruc::postitionSpecific);
+	PMStruc n;
 	n.initPymWithABs(pem.aAbs,data[0].size());
 
 
@@ -344,7 +324,7 @@ int test_ensemble_bynumber()
 	printf("%d\n",pmse.pyms.size());
 	for (auto pm: pmse.pyms)
 	{
-		printf("%d\n",pm.getNumofData());
+//		printf("%d\n",pm.getNumofData());
 	}
 
 	printf("-------------******************-------------**********************\n");
@@ -358,7 +338,7 @@ int test_ensemble_bynumber()
 	printf("%d\n",pmse.pyms.size());
 	for (auto pm: pmse.pyms)
 	{
-		printf("%d\n",pm.getNumofData());
+	//	printf("%d\n",pm.getNumofData());
 	}
 
 
@@ -373,7 +353,7 @@ int test_ensemble_bynumber()
 	printf("%d\n",pmse.pyms.size());
 	for (auto pm: pmse.pyms)
 	{
-		printf("%d\n",pm.getNumofData());
+	//	printf("%d\n",pm.getNumofData());
 	}
 
 	
@@ -401,7 +381,7 @@ int test_basic()
 
 	
 
-	PMStruc pedmd(PMStruc::postitionSpecific);
+	PMStruc pedmd;
 	printf("-------------******************-----(%d)--------**********************\n",dim);
 	pedmd.generatePymFromdata(data,dim);
 	givescores(pedmd,dim,false,false);
@@ -422,7 +402,7 @@ int no_app()
 
 
 
-	PMStruc pedmd(PMStruc::postitionSpecific);
+	PMStruc pedmd;
 
 	pedmd.generatePymFromdata(data,dim);
 	givescores(pedmd,dim,false,false);
@@ -443,7 +423,7 @@ int no_pos()
 
 
 
-	PMStruc pedmd(PMStruc::postitionSpecific);
+	PMStruc pedmd;
 
 	pedmd.generatePymFromdata(selectVec(data,dim),dim);
 	givescores(pedmd,dim,false,true);
@@ -459,7 +439,7 @@ int genpostraining()
 	auto ad=getAllfeas(dim);
 	auto data=ad.first;
 	
-	PMStruc pedmd(PMStruc::postitionSpecific);
+	PMStruc pedmd;
 	//printf("-------------******************-----(%d)--------**********************\n",dim);
 	pedmd.generatePymFromdata(data,dim);
 	vector<string> flNms;
@@ -511,7 +491,7 @@ int gentraining()
 	auto ad=getAllfeas(dim);
 	auto data=ad.first;
 	
-	PMStruc pedmd(PMStruc::postitionSpecific);
+	PMStruc pedmd;
 	//printf("-------------******************-----(%d)--------**********************\n",dim);
 	pedmd.generatePymFromdata(data,dim);
 	vector<string> flNms;
@@ -566,7 +546,7 @@ int testposspe()
 
 
 
-	PMStruc pedmd(PMStruc::postitionSpecific);
+	PMStruc pedmd;
 //	printf("-------------******************-----(%d)--------**********************\n",dim);
 	pedmd.generatePymFromdata(data,dim);
 	givescores(pedmd,dim,false,false);
@@ -576,20 +556,22 @@ int testposspe()
 
 int benchmark()
 {
-	_chdir("E:\\carData\\TrainImages");
+	_chdir("E:\\CarData\\voc2007\\transfer");
 	
-	int dim=10;
+	int dim=14;
 	auto ad=getAllfeas(dim);
 	auto data=ad.first;
 	
-	_chdir("E:\\carData\\TestImages\\mytest");
+	_chdir("E:\\CarData\\voc2007\\transfer");
 
 
 
-	PMStruc pedmd(PMStruc::positionsimple,5);
+	PMStruc pedmd(5);
 //	printf("-------------******************-----(%d)--------**********************\n",dim);
-	pedmd.generatePymFromdata(data,dim);
-	givescores(pedmd,dim,false,false);
+	pedmd.generatePymFromdata(data,dim-2);
+	PMStruc::printTofile(pedmd,"vospms.txt");
+
+//	givescores(pedmd,dim,false,false);
 
 	return 0;
 }
@@ -606,7 +588,7 @@ int splitmethod()
 
 
 
-	PMStruc pedmd(PMStruc::positionsimple,5);
+	PMStruc pedmd(5);
 //	printf("-------------******************-----(%d)--------**********************\n",dim);
 	pedmd.generatePymFromdata(data,dim);
 	givescoressplit(pedmd,dim,false,false);
@@ -627,7 +609,7 @@ int testposLvlLmt()
 
 	for (int i = 3; i < 8; i++)
 	{
-		PMStruc pedmd(PMStruc::postitionSpecific,i);
+		PMStruc pedmd(i);
 		
 		pedmd.generatePymFromdata(data,dim);
 		printf("-------------******************-----(%d)--------**********************\n",i);
@@ -663,7 +645,7 @@ int testPosWeight()
 
 
 
-	PMStruc pedmd(PMStruc::postitionSpecific);
+	PMStruc pedmd;
 	pedmd.generatePymFromdata(data,dim);
 
 
@@ -693,7 +675,7 @@ int testposLvlLmtRatio()
 	double ra=0.5;
 	for (int i = 3; i < 8; i++)
 	{
-		PMStruc pedmd(PMStruc::postitionSpecific,i);
+		PMStruc pedmd(i);
 		
 		pedmd.generatePymFromdata(data,dim);
 		printf("-------------******************-----(%d)--------**********************\n",i);
@@ -772,11 +754,11 @@ int main()
 //	vector<vector<pair<int,int> > > r;
 //	r=genPAorders(6);
 
-//	PMStruc pedmd(PMStruc::postitionSpecific,5);
+//	PMStruc pedmd(5);
 //	benchmark();
 
 
-//	benchmark();
-	splitmethod();
+	benchmark();
+//	splitmethod();
 	return 0;
 }

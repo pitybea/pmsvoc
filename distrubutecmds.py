@@ -23,13 +23,13 @@ if __name__ == "__main__":
     allins=open('allcmds%d'%(inm),'wb')
     
     for i in range(0,len(ecmd)):
-        ins=open('mycmd%d'%(i),'wb')
+        ins=open('mycmd%d.bat'%(i),'wb')
         for acmd in ecmd[i]:
             ins.write('%s\n'%(acmd))
         
         ins.close()
         
-        allins.write('./mycmd%d &\n'%(i))
+        allins.write('start mycmd%d.bat \n'%(i))
     
     allins.close()
         
